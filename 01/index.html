@@ -56,11 +56,13 @@
                 <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Toggle Dark Mode">
                     <!-- Sun Icon for Dark Mode -->
                     <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                <!-- Moon Icon for Light Mode -->
-                <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                </svg>
-            </button>
+                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4.22 1.32a1 1 0 011.415 0l.708.707a1 1 0 01-1.414 1.415l-.708-.708a1 1 0 010-1.414zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zm-1.32 4.22a1 1 0 010 1.415l-.707.708a1 1 0 01-1.415-1.414l.707-.708a1 1 0 011.415 0zM10 18a1 1 0 01-1-1v-1a1 1 0 112 0v1a1 1 0 01-1 1zm-4.22-1.32a1 1 0 01-1.415 0l-.708-.707a1 1 0 011.414-1.415l.708.708a1 1 0 010 1.414zM2 10a1 1 0 011-1h1a1 1 0 110 2H3a1 1 0 01-1-1zm1.32-4.22a1 1 0 010-1.415l.707-.708a1 1 0 011.415 1.414l-.707.708a1 1 0 01-1.415 0zM10 5a5 5 0 100 10 5 5 0 000-10z" clip-rule="evenodd"></path>
+                    </svg>
+                    <!-- Moon Icon for Light Mode -->
+                    <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                    </svg>
+                </button>
             </div>
         </div>
     </header>
@@ -311,8 +313,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
             </button>
-            <!-- Image (Fallback included) -->
-            <img src="unnamed.jpg?v=new" alt="인공지능 윤리의 핵심 쟁점과 사회적 과제" class="hidden w-full max-h-[90vh] object-contain rounded-lg shadow-2xl bg-white" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop';">
+            <!-- Image (Fallback included) - hidden 속성을 제거했습니다 -->
+            <img src="unnamed.png" alt="인공지능 윤리의 핵심 쟁점과 사회적 과제" class="w-full max-h-[90vh] object-contain rounded-lg shadow-2xl bg-white" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop';">
         </div>
     </div>
 
