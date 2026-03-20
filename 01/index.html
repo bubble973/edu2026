@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>인공지능의 편향성과 윤리적 딜레마</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Pretendard -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Pretendard', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .quiz-option:checked + label {
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .dark .quiz-option:checked + label {
+            border-color: #60a5fa;
+            background-color: rgba(96, 165, 250, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-darkBg dark:text-gray-100 font-sans antialiased">
+
+    <!-- Header (Sticky) -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-colors">
+        <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-teal-500 dark:from-blue-400 dark:to-teal-300">
+                AI Ethics Guide
+            </h1>
+            <div class="flex items-center gap-3">
+                <a href="../index.html" class="flex items-center gap-1 px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 dark:text-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-lg transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    홈
+                </a>
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Toggle Dark Mode">
+                    <!-- Sun Icon for Dark Mode -->
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                <!-- Moon Icon for Light Mode -->
+                <svg id="theme-toggle-dark-icon" class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+            </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-8 space-y-12">
+        
+        <!-- Hero Section -->
+        <section class="text-center space-y-4 pt-8">
+            <span class="px-3 py-1 text-sm font-semibold text-blue-700 bg-blue-100 rounded-full dark:bg-blue-900/50 dark:text-blue-300">학습 가이드</span>
+            <h2 class="text-3xl md:text-5xl font-extrabold tracking-tight">인공지능의 공정함이라는 환상</h2>
+            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                우리가 몰랐던 AI 윤리의 이면과 자율주행 자동차가 마주한 도덕적 딜레마를 학습해봅시다.
+            </p>
+        </section>
+
+        <!-- Infographic Button Section -->
+        <section class="text-center py-4">
+            <button onclick="openModal()" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                </svg>
+                핵심 쟁점 인포그래픽 보기
+            </button>
+        </section>
+
+        <!-- Section 1: AI Bias -->
+        <section class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white dark:bg-darkCard rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 transition-colors">
+                <h3 class="text-2xl font-bold mb-4">인공지능의 편향성</h3>
+                <p class="mb-4 text-gray-600 dark:text-gray-300 leading-relaxed">
+                    AI는 감정이 없기 때문에 객관적일 것이라고 믿기 쉽지만, 실제로는 <strong>인간의 편향을 정교하게 복제</strong>한 결과물인 경우가 많습니다. 크게 두 가지 원인이 있습니다.
+                </p>
+                <ul class="space-y-4 mt-6">
+                    <li class="flex items-start gap-3">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold">1</div>
+                        <div>
+                            <strong class="block text-lg">학습 데이터 편향</strong>
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">과거 데이터 자체에 존재하는 특정 집단에 대한 편견이나 불균형이 AI에게 진리로 학습되는 현상</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <div class="flex-shrink-0 w-8 h-8 rounded-full bg-teal-100 dark:bg-teal-900/50 text-teal-600 dark:text-teal-400 flex items-center justify-center font-bold">2</div>
+                        <div>
+                            <strong class="block text-lg">알고리즘 편향</strong>
+                            <span class="text-gray-600 dark:text-gray-400 text-sm">데이터를 처리하고 우선순위를 결정하는 논리 구조 자체에서 발생하는 체계적인 오류</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Comparison Table -->
+            <div class="bg-white dark:bg-darkCard rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 transition-colors flex flex-col justify-center">
+                <h3 class="text-xl font-bold mb-4">인간 vs 인공지능 편향 비교</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b-2 border-gray-200 dark:border-gray-700">
+                                <th class="py-3 px-2 text-gray-500 dark:text-gray-400 font-semibold">항목</th>
+                                <th class="py-3 px-2 text-blue-600 dark:text-blue-400 font-semibold">인간의 편향</th>
+                                <th class="py-3 px-2 text-teal-600 dark:text-teal-400 font-semibold">인공지능의 편향</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 dark:divide-gray-800 text-sm md:text-base">
+                            <tr>
+                                <td class="py-3 px-2 font-medium">변경 가능성</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">시간/경험에 따라 변함</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">수정 전까지 동일 패턴 유지</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-2 font-medium">인식 및 수정</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">스스로 자각/교육 필요 (어려움)</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">결과 모니터링 후 즉각 데이터 수정 가능</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-2 font-medium">영향력</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">개인/집단에 국한됨 (국지적)</td>
+                                <td class="py-3 px-2 text-gray-600 dark:text-gray-300">시스템 전반에 파급됨 (광범위)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Trolley Dilemma -->
+        <section class="bg-gradient-to-br from-gray-900 to-blue-900 rounded-2xl p-6 md:p-8 shadow-lg text-white">
+            <h3 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                <span>🚂</span> 도덕적 모순: 트롤리 딜레마
+            </h3>
+            <p class="mb-8 text-blue-100 leading-relaxed max-w-3xl">
+                '5명을 구하기 위해 1명을 희생시킬 것인가?' 이 질문에 대해 상황에 따라 인간의 도덕적 판단은 크게 엇갈립니다. 논리적인 코드로 작동하는 자율주행차는 이를 어떻게 받아들여야 할까요?
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Case 1 -->
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <h4 class="text-xl font-bold mb-2">사례 1: 선로 전환기 당기기</h4>
+                    <p class="text-sm text-blue-100 mb-4 h-12">선로 전환기를 당겨 5명을 살리고 1명을 희생시키는 간접적 행위</p>
+                    <div class="flex items-end gap-4">
+                        <div class="text-4xl font-extrabold text-green-400">89%</div>
+                        <div class="text-sm text-gray-300 pb-1">찬성률</div>
+                    </div>
+                    <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+                        <div class="bg-green-400 h-2 rounded-full" style="width: 89%"></div>
+                    </div>
+                </div>
+                <!-- Case 2 -->
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20">
+                    <h4 class="text-xl font-bold mb-2">사례 2: 육교 위에서 밀기</h4>
+                    <p class="text-sm text-blue-100 mb-4 h-12">육교 위의 1명을 직접 밀어 트롤리를 멈춰 5명을 구하는 신체적 개입</p>
+                    <div class="flex items-end gap-4">
+                        <div class="text-4xl font-extrabold text-red-400">11%</div>
+                        <div class="text-sm text-gray-300 pb-1">찬성률</div>
+                    </div>
+                    <div class="w-full bg-white/20 rounded-full h-2 mt-2">
+                        <div class="bg-red-400 h-2 rounded-full" style="width: 11%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIT Moral Machine -->
+            <div class="mt-8 bg-black/30 p-6 rounded-xl border border-white/10">
+                <h4 class="text-lg font-bold mb-3">🌍 MIT '모럴 머신' 연구 결과 (문화적 상대성)</h4>
+                <p class="text-sm text-gray-200 mb-4">전 세계 230만 명 대상 조사 결과, 생명을 구하는 우선순위가 문화권마다 다르게 나타났습니다.</p>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1 bg-white/5 p-4 rounded-lg">
+                        <span class="text-blue-300 font-bold block mb-1">서구권 (유럽/북미)</span>
+                        <span class="text-lg">👶 '어린이' 우선 보호 경향</span>
+                    </div>
+                    <div class="flex-1 bg-white/5 p-4 rounded-lg">
+                        <span class="text-yellow-300 font-bold block mb-1">동방 국가</span>
+                        <span class="text-lg">👴 '노인(어른 공경)' 우선 보호 경향</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section (Interactive) -->
+        <section class="bg-white dark:bg-darkCard rounded-2xl p-6 md:p-8 shadow-sm border border-gray-100 dark:border-gray-800 transition-colors" id="quiz-section">
+            <h3 class="text-2xl font-bold mb-2">📝 학습 확인 퀴즈</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">배운 내용을 바탕으로 정답을 골라보세요!</p>
+
+            <form id="quizForm" class="space-y-8">
+                <!-- Q1 -->
+                <div class="space-y-4">
+                    <p class="font-semibold text-lg"><span class="text-blue-500 mr-2">Q1.</span>인공지능이 편향성을 가질 수 있는 가장 근본적인 이유는 무엇입니까?</p>
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q1" id="q1_a" value="A">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q1_a">
+                                A) 인공지능이 스스로 감정과 자아를 가지게 되었기 때문에
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q1" id="q1_b" value="B">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q1_b">
+                                B) 인간이 편향되게 만든 데이터와 알고리즘에 기반하여 학습하기 때문에
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q1" id="q1_c" value="C">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q1_c">
+                                C) 기계적인 오류나 하드웨어 결함이 자주 발생하기 때문에
+                            </label>
+                        </div>
+                    </div>
+                    <div id="feedback-q1" class="hidden mt-2 p-3 rounded-md text-sm"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="space-y-4">
+                    <p class="font-semibold text-lg"><span class="text-blue-500 mr-2">Q2.</span>트롤리 딜레마 사례에서 동일하게 5명을 구하는 결과임에도, 육교 위에서 1명을 직접 미는 행위에 대해 사람들이 느끼는 감정은 어떠합니까?</p>
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q2" id="q2_a" value="A">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q2_a">
+                                A) 결과가 같으므로 선로 전환기를 당기는 것과 똑같이 89%가 찬성했다.
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q2" id="q2_b" value="B">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q2_b">
+                                B) 직접적인 개입에 대한 거부감으로 인해 11%만이 찬성했다.
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q2" id="q2_c" value="C">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q2_c">
+                                C) 오히려 확실한 방법이라 생각하여 99%가 찬성했다.
+                            </label>
+                        </div>
+                    </div>
+                    <div id="feedback-q2" class="hidden mt-2 p-3 rounded-md text-sm"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="space-y-4">
+                    <p class="font-semibold text-lg"><span class="text-blue-500 mr-2">Q3.</span>자율주행 자동차 사고 상황 시 '보호 우선순위'에 관한 MIT 연구에 따르면, 문화권별 특징으로 알맞은 것은?</p>
+                    <div class="space-y-2">
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q3" id="q3_a" value="A">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q3_a">
+                                A) 서구권 국가들은 노인을, 동방 국가들은 어린이를 우선 보호하려 한다.
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q3" id="q3_b" value="B">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q3_b">
+                                B) 서구권 국가들은 어린이를, 동방 국가들은 어른을 공경하여 노인을 우선 보호하려 한다.
+                            </label>
+                        </div>
+                        <div class="relative">
+                            <input class="sr-only quiz-option" type="radio" name="q3" id="q3_c" value="C">
+                            <label class="flex p-4 border border-gray-200 dark:border-gray-700 cursor-pointer rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" for="q3_c">
+                                C) 모든 문화권에서 일치하게 동물을 인간보다 우선 보호하려 한다.
+                            </label>
+                        </div>
+                    </div>
+                    <div id="feedback-q3" class="hidden mt-2 p-3 rounded-md text-sm"></div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <button type="button" onclick="submitQuiz()" class="w-full md:w-auto px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors shadow-md">
+                        정답 확인하기
+                    </button>
+                </div>
+            </form>
+
+            <div id="quiz-result" class="hidden mt-6 p-4 rounded-xl text-center font-bold text-lg border-2">
+                <!-- Result dynamically injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-8 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800 mt-8">
+        <p>인공지능 윤리 수업용 인터랙티브 웹페이지 &copy; 2026</p>
+    </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="relative max-w-5xl w-full mx-4 flex flex-col items-center justify-center h-full py-8">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 md:top-8 md:right-8 text-white hover:text-gray-300 focus:outline-none bg-black/50 p-2 rounded-full backdrop-blur-sm z-10 transition-transform hover:scale-110">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <!-- Image (Fallback included) -->
+            <img src="unnamed.jpg?v=new" alt="인공지능 윤리의 핵심 쟁점과 사회적 과제" class="hidden w-full max-h-[90vh] object-contain rounded-lg shadow-2xl bg-white" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop';">
+        </div>
+    </div>
+
+    <!-- JavaScript functionality -->
+    <script>
+        // 1. Dark/Light Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            lightIcon.classList.remove('hidden');
+            darkIcon.classList.add('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            darkIcon.classList.remove('hidden');
+            lightIcon.classList.add('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // 2. Modal Logic
+        const modal = document.getElementById('imageModal');
+        
+        function openModal() {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Allow display:flex to apply before changing opacity
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+            }, 10);
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
+        }
+
+        function closeModal() {
+            modal.classList.add('opacity-0');
+            // Wait for transition to finish before hiding
+            setTimeout(() => {
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
+            }, 300);
+            document.body.style.overflow = ''; // Restore background scroll
+        }
+
+        // Close modal when clicking on the dark background
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal || e.target.closest('.relative') === null) {
+                closeModal();
+            }
+        });
+
+        // 3. Quiz Logic
+        const answers = { q1: 'B', q2: 'B', q3: 'B' };
+        const explanations = {
+            q1: '정답은 B입니다. 인공지능은 설계 과정이나 데이터 수집 시 인간적 요소가 반영될 수밖에 없습니다.',
+            q2: '정답은 B입니다. 인간은 11%만 찬성할 만큼 직접적인 신체적 개입에 대한 도덕적 거부감이 강합니다.',
+            q3: '정답은 B입니다. 서구권은 어린이, 동방 국가는 문화적 배경에 따라 노인을 우선하는 경향을 보였습니다.'
+        };
+
+        function submitQuiz() {
+            let score = 0;
+            const total = 3;
+
+            for (let i = 1; i <= total; i++) {
+                const qName = `q${i}`;
+                const selected = document.querySelector(`input[name="${qName}"]:checked`);
+                const feedbackEl = document.getElementById(`feedback-${qName}`);
+                
+                feedbackEl.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800', 'dark:bg-green-900/30', 'dark:text-green-300', 'dark:bg-red-900/30', 'dark:text-red-300', 'bg-yellow-100', 'text-yellow-800', 'dark:bg-yellow-900/30', 'dark:text-yellow-300');
+
+                if (selected) {
+                    if (selected.value === answers[qName]) {
+                        score++;
+                        feedbackEl.classList.add('bg-green-100', 'text-green-800', 'dark:bg-green-900/30', 'dark:text-green-300');
+                        feedbackEl.innerHTML = `✅ <strong>정답입니다!</strong> ${explanations[qName]}`;
+                    } else {
+                        feedbackEl.classList.add('bg-red-100', 'text-red-800', 'dark:bg-red-900/30', 'dark:text-red-300');
+                        feedbackEl.innerHTML = `❌ <strong>틀렸습니다.</strong> ${explanations[qName]}`;
+                    }
+                } else {
+                    feedbackEl.classList.add('bg-yellow-100', 'text-yellow-800', 'dark:bg-yellow-900/30', 'dark:text-yellow-300');
+                    feedbackEl.innerHTML = `⚠️ 답안을 선택해주세요.`;
+                }
+            }
+
+            const resultEl = document.getElementById('quiz-result');
+            resultEl.classList.remove('hidden', 'border-green-500', 'text-green-600', 'border-red-500', 'text-red-600', 'border-yellow-500', 'text-yellow-600', 'border-blue-500', 'text-blue-600', 'dark:text-green-400', 'dark:text-blue-400');
+            
+            const allAnswered = document.querySelectorAll('.quiz-option:checked').length === total;
+            
+            if (!allAnswered) {
+                resultEl.classList.add('border-yellow-500', 'text-yellow-600');
+                resultEl.innerText = '모든 문제를 풀어주세요!';
+                return;
+            }
+
+            if (score === total) {
+                resultEl.classList.add('border-green-500', 'text-green-600', 'dark:text-green-400');
+                resultEl.innerText = `🎉 완벽합니다! ${total}문제 중 ${score}문제를 맞추셨습니다!`;
+            } else {
+                resultEl.classList.add('border-blue-500', 'text-blue-600', 'dark:text-blue-400');
+                resultEl.innerText = `👍 수고하셨습니다. ${total}문제 중 ${score}문제를 맞추셨습니다. 오답 노트를 확인해 보세요.`;
+            }
+        }
+    </script>
+</body>
+</html>
