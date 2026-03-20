@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인공지능 기초 랜딩페이지</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Tailwind Configuration for Dark Mode -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+
+  <!-- Prevent FOUC for Dark Mode -->
+  <script>
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    @keyframes blob {
+      0% { transform: translate(0px, 0px) scale(1); }
+      33% { transform: translate(30px, -50px) scale(1.1); }
+      66% { transform: translate(-20px, 20px) scale(0.9); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+    .animate-blob {
+      animation: blob 7s infinite;
+    }
+    .animation-delay-2000 {
+      animation-delay: 2s;
+    }
+    .animation-delay-4000 {
+      animation-delay: 4s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.5s ease-out forwards;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 font-sans selection:bg-indigo-200 dark:selection:bg-indigo-900 transition-colors duration-300">
+
+  <!-- 네비게이션 바 -->
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
+    <div class="max-w-6xl mx-auto px-6 flex justify-between items-center">
+      <div class="flex items-center gap-2 font-bold text-xl text-indigo-900 dark:text-indigo-400 transition-colors">
+        <i data-lucide="brain-circuit" class="text-indigo-600 dark:text-indigo-500"></i>
+        <span>AI Basics</span>
+      </div>
+      <div class="flex items-center gap-8">
+        <div class="hidden md:flex gap-8 font-medium text-slate-600 dark:text-slate-300">
+          <a href="#home" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">홈</a>
+          <a href="#ethics" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">인공지능 윤리</a>
+          <a href="./01/index.html" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">윤리적 딜레마</a>
+        </div>
+        
+        <!-- 다크 모드 토글 버튼 -->
+        <button id="theme-toggle" class="p-2.5 rounded-xl bg-white/50 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-white dark:hover:bg-slate-700 backdrop-blur-sm border border-slate-200 dark:border-slate-700 shadow-sm transition-all">
+          <i data-lucide="moon" class="w-5 h-5 hidden dark:block"></i>
+          <i data-lucide="sun" class="w-5 h-5 block dark:hidden"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 히어로 섹션 -->
+  <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-900 to-slate-900 pt-20">
+    <div class="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+      <div class="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
+      <div class="absolute top-0 right-20 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
+      <div class="absolute -bottom-8 left-40 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-4000"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-4xl mx-auto px-6 text-center text-white">
+      <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">인공지능 기초,</span><br/>
+        미래를 그리는 첫 걸음
+      </h1>
+      <p class="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+        AI가 세상을 어떻게 바꾸고 있는지, 우리는 무엇을 준비해야 하는지 
+        직접 만들어보고 토론하며 배워봅시다.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#ethics" class="px-8 py-4 rounded-full bg-white text-indigo-900 font-bold hover:bg-slate-100 transition-transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-white/20">
+          <i data-lucide="scale" class="w-5 h-5"></i>
+          AI 윤리 탐구하기
+        </a>
+        <a href="./01/index.html" class="px-8 py-4 rounded-full bg-indigo-600 border border-indigo-500 text-white font-bold hover:bg-indigo-500 transition-transform hover:scale-105 flex items-center justify-center gap-2 shadow-lg shadow-indigo-500/30">
+          <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          윤리적 딜레마
+        </a>
+      </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <i data-lucide="arrow-down" class="text-white/50 w-8 h-8"></i>
+    </div>
+  </section>
+
+  <!-- 인공지능 윤리 섹션 -->
+  <section id="ethics" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight transition-colors">인공지능 <span class="text-indigo-600 dark:text-indigo-400">윤리</span></h2>
+        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto transition-colors">
+          기술의 발전 속도만큼 중요한 것은 올바른 방향입니다. 
+          AI 시대의 시민으로서 우리가 반드시 고민해야 할 윤리적 문제들을 알아봅니다.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-8 items-start">
+        <!-- 탭 메뉴 -->
+        <div id="tabs-container" class="md:col-span-4 flex flex-col gap-3">
+          <!-- 자바스크립트로 탭 메뉴가 생성됩니다 -->
+        </div>
+
+        <!-- 탭 콘텐츠 -->
+        <div class="md:col-span-8">
+          <div class="bg-slate-50 dark:bg-slate-800/50 rounded-3xl p-8 md:p-12 border border-slate-200 dark:border-slate-700/50 shadow-xl shadow-slate-100 dark:shadow-none transition-all duration-500">
+            <div class="flex items-center gap-4 mb-6">
+              <div id="active-icon" class="p-3 bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-2xl transition-colors">
+                <!-- 아이콘 삽입 -->
+              </div>
+              <h3 id="active-title" class="text-3xl font-bold text-slate-900 dark:text-white transition-colors"></h3>
+            </div>
+            <p id="active-desc" class="text-xl text-slate-700 dark:text-slate-300 leading-relaxed mb-10 transition-colors"></p>
+
+            <!-- 딜레마 인터랙티브 영역 -->
+            <div class="bg-white dark:bg-slate-900/80 rounded-2xl border-2 border-indigo-100 dark:border-indigo-900/50 overflow-hidden shadow-sm transition-colors">
+              <div class="bg-indigo-50 dark:bg-indigo-900/20 p-4 border-b-2 border-indigo-100 dark:border-indigo-900/50 flex items-center justify-between transition-colors">
+                <span class="font-bold text-indigo-800 dark:text-indigo-300 flex items-center gap-2">
+                  <i data-lucide="brain-circuit" class="w-5 h-5"></i> 생각 열기 딜레마
+                </span>
+              </div>
+              <div class="p-6 md:p-8">
+                <p id="active-dilemma" class="text-lg font-medium text-slate-800 dark:text-slate-200 mb-6 transition-colors"></p>
+                
+                <!-- 확인하기 버튼 -->
+                <button id="reveal-btn" class="w-full py-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold transition-colors flex items-center justify-center gap-2">
+                  우리는 어떻게 해야 할까요? 클릭하여 확인하기 <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                </button>
+
+                <!-- 솔루션 영역 (기본 숨김) -->
+                <div id="solution-container" class="hidden animate-fade-in-up bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/50 rounded-xl p-6 relative overflow-hidden transition-colors">
+                  <div class="absolute top-0 left-0 w-2 h-full bg-green-500 dark:bg-green-600"></div>
+                  <h4 class="font-bold text-green-800 dark:text-green-400 mb-2 flex items-center gap-2 transition-colors">
+                    <i data-lucide="check-circle" class="w-5 h-5"></i> 가이드라인
+                  </h4>
+                  <p id="active-solution" class="text-green-900 dark:text-green-300 leading-relaxed transition-colors"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 윤리적 딜레마 섹션 -->
+  <section class="py-32 bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center text-center px-6 transition-colors duration-300">
+    <h2 class="text-4xl font-extrabold text-slate-900 dark:text-white mb-6 transition-colors">직접 경험해보는 <span class="text-indigo-600 dark:text-indigo-400">AI 윤리</span></h2>
+    <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 transition-colors">
+      우리가 배운 인공지능 윤리 문제들을 실제 상황에 적용해볼 시간입니다. <br class="hidden sm:block"/>
+      준비가 되었다면 아래 버튼을 눌러 시뮬레이션을 시작해보세요.
+    </p>
+    <a href="./01/index.html" class="group relative inline-flex items-center justify-center px-10 py-5 text-xl font-bold text-white bg-indigo-600 rounded-2xl overflow-hidden shadow-xl shadow-indigo-200 dark:shadow-none transition-all hover:scale-105 hover:shadow-2xl hover:shadow-indigo-300">
+      <span class="relative z-10 flex items-center gap-3">
+        <i data-lucide="alert-triangle" class="w-7 h-7"></i>
+        윤리적 딜레마 체험하기
+        <i data-lucide="chevron-right" class="w-6 h-6 group-hover:translate-x-2 transition-transform"></i>
+      </span>
+      <div class="absolute inset-0 h-full w-full bg-gradient-to-r from-indigo-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </a>
+  </section>
+
+  <!-- 푸터 -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+      <div>
+        <div class="flex items-center gap-2 font-bold text-xl text-white mb-2">
+          <i data-lucide="brain-circuit" class="text-indigo-400"></i>
+          <span>AI Basics Class</span>
+        </div>
+        <p>실수해도 괜찮습니다. 호기심을 가지고 즐겁게 인공지능을 탐험해봅시다!</p>
+      </div>
+      <div class="text-center md:text-right">
+        <p class="mb-1">미래를 준비하는 정보 수업</p>
+        <p class="text-sm opacity-75">© 2026 정보교사. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Javascript Logic -->
+  <script>
+    // 1. 데이터 정의
+    const ethicsData = [
+      {
+        title: "알고리즘 편향성",
+        icon: "eye",
+        desc: "AI도 편견을 가질 수 있을까요? 인공지능이 학습하는 데이터에 포함된 인간의 편견이 어떻게 차별을 만들어내는지 알아봅니다.",
+        dilemma: "채용 AI가 과거 데이터를 바탕으로 특정 성별이나 인종을 선호하게 학습되었다면, 이 AI를 사용하는 것은 공정할까요?",
+        solution: "다양하고 공정한 데이터를 수집하고, 알고리즘의 결과를 지속적으로 모니터링해야 합니다."
+      },
+      {
+        title: "자율주행 딜레마",
+        icon: "alert-triangle",
+        desc: "트롤리 딜레마를 AI에 적용해봅니다. 피할 수 없는 사고의 순간, 자율주행 자동차는 누구를 보호하도록 프로그래밍되어야 할까요?",
+        dilemma: "직진하면 5명의 보행자를 치게 되고, 방향을 틀면 탑승자 1명이 위험해집니다. AI는 어떤 선택을 해야 할까요?",
+        solution: "정답이 없는 문제입니다. 따라서 사회적 합의와 법적, 윤리적 기준을 마련하는 것이 무엇보다 중요합니다."
+      },
+      {
+        title: "딥페이크와 저작권",
+        icon: "shield-check",
+        desc: "가짜 뉴스, 초상권 침해, 그리고 AI가 그린 그림의 저작권은 누구에게 있을까요? 생성형 AI 시대의 새로운 윤리적 문제를 고민합니다.",
+        dilemma: "AI가 유명 화가의 화풍을 모방하여 새로운 그림을 그렸습니다. 이 그림의 저작권자는 AI 개발자, 사용자, 아니면 원작자일까요?",
+        solution: "AI 생성물에 대한 워터마크 도입, 창작자의 권리 보호를 위한 새로운 법적 가이드라인이 논의되고 있습니다."
+      }
+    ];
+
+    let activeEthicsTab = 0;
+
+    // DOM 요소 선택
+    const navbar = document.getElementById('navbar');
+    const tabsContainer = document.getElementById('tabs-container');
+    const activeIcon = document.getElementById('active-icon');
+    const activeTitle = document.getElementById('active-title');
+    const activeDesc = document.getElementById('active-desc');
+    const activeDilemma = document.getElementById('active-dilemma');
+    const revealBtn = document.getElementById('reveal-btn');
+    const solutionContainer = document.getElementById('solution-container');
+    const activeSolution = document.getElementById('active-solution');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+
+    // 2. 다크 모드 토글 로직
+    themeToggleBtn.addEventListener('click', () => {
+      // Toggle dark class on html
+      document.documentElement.classList.toggle('dark');
+      
+      // Update local storage
+      if (document.documentElement.classList.contains('dark')) {
+        localStorage.theme = 'dark';
+      } else {
+        localStorage.theme = 'light';
+      }
+    });
+
+    // 3. 스크롤 이벤트 (네비게이션 바 스타일 변경)
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-white/90', 'dark:bg-slate-900/90', 'backdrop-blur-sm', 'shadow-sm', 'dark:border-b', 'dark:border-slate-800', 'py-4');
+        navbar.classList.remove('bg-transparent', 'py-6');
+      } else {
+        navbar.classList.add('bg-transparent', 'py-6');
+        navbar.classList.remove('bg-white/90', 'dark:bg-slate-900/90', 'backdrop-blur-sm', 'shadow-sm', 'dark:border-b', 'dark:border-slate-800', 'py-4');
+      }
+    });
+
+    // 4. 탭 메뉴 렌더링 함수
+    function renderTabs() {
+      tabsContainer.innerHTML = ''; // 초기화
+      
+      ethicsData.forEach((item, index) => {
+        const isActive = activeEthicsTab === index;
+        
+        // 탭 버튼 생성
+        const button = document.createElement('button');
+        button.className = `flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-300 w-full ${
+          isActive 
+            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-200 dark:shadow-none scale-105' 
+            : 'bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-100 dark:border-slate-700/50'
+        }`;
+        
+        button.onclick = () => handleTabChange(index);
+
+        // 탭 내부 아이콘 영역
+        const iconDiv = document.createElement('div');
+        iconDiv.className = `p-2 rounded-xl transition-colors ${isActive ? 'bg-white/20' : 'bg-white dark:bg-slate-700 shadow-sm dark:shadow-none'}`;
+        iconDiv.innerHTML = `<i data-lucide="${item.icon}" class="w-6 h-6"></i>`;
+        
+        // 탭 제목
+        const titleSpan = document.createElement('span');
+        titleSpan.className = 'font-bold text-lg';
+        titleSpan.textContent = item.title;
+
+        button.appendChild(iconDiv);
+        button.appendChild(titleSpan);
+        tabsContainer.appendChild(button);
+      });
+
+      // 아이콘 새로 렌더링
+      lucide.createIcons();
+    }
+
+    // 5. 콘텐츠 업데이트 함수
+    function updateContent() {
+      const data = ethicsData[activeEthicsTab];
+      
+      // 내용 변경
+      activeIcon.innerHTML = `<i data-lucide="${data.icon}" class="w-6 h-6"></i>`;
+      activeTitle.textContent = data.title;
+      activeDesc.textContent = data.desc;
+      activeDilemma.textContent = `"${data.dilemma}"`;
+      activeSolution.textContent = data.solution;
+
+      // 딜레마 확인 버튼 상태 초기화 (숨겼던 솔루션 다시 숨기기)
+      revealBtn.classList.remove('hidden');
+      solutionContainer.classList.add('hidden');
+
+      // 아이콘 새로 렌더링
+      lucide.createIcons();
+    }
+
+    // 6. 탭 클릭 핸들러
+    function handleTabChange(index) {
+      activeEthicsTab = index;
+      renderTabs();
+      updateContent();
+    }
+
+    // 7. 확인하기 버튼 클릭 핸들러
+    revealBtn.addEventListener('click', () => {
+      revealBtn.classList.add('hidden');
+      solutionContainer.classList.remove('hidden');
+    });
+
+    // 초기화 실행
+    renderTabs();
+    updateContent();
+
+  </script>
+</body>
+</html>
